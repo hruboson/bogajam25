@@ -87,8 +87,8 @@ body {
 
 	/* Bucket styling */
 	.bucket {
-		width: 200px;
-		height: 150px;
+		width: 120px;
+		height: 120px;
 		background: #3498db;
 		clip-path: polygon(
 			0% 0%,     /* upper left */
@@ -113,8 +113,8 @@ body {
 	}
 
 	.smaller-bucket {
-		height: 120px;
-		width: 120px;
+		height: 90px;
+		width: 90px;
 	}
 
 	.bucket-fill {
@@ -268,8 +268,8 @@ body {
 
       // sets water level of both buckets according to currentWaterLevel variables
       function setWaterLevel() {
-        smallerBucketFill.style = `height: ${120/3*smallerBucketCurrentWaterLevel}px`;
-        biggerBucketFill.style = `height: ${150/5*biggerBucketCurrentWaterLevel}px`;
+        smallerBucketFill.style = `height: ${90/3*smallerBucketCurrentWaterLevel}px`;
+        biggerBucketFill.style = `height: ${120/5*biggerBucketCurrentWaterLevel}px`;
       }
 
       setWaterLevel();
