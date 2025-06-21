@@ -35,7 +35,6 @@ body {
 	}
 
 	.grid-item {
-		border: 1px solid lightgray;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -125,6 +124,69 @@ body {
 	}
 	/*--- Bucket styling ---*/
 
+	/* Button styling */
+	.google-btn {
+		font-family: 'Roboto', Arial, sans-serif;
+		font-weight: 500;
+		font-size: 14px;
+		color: #3c4043;
+		background-color: #fff;
+		border: 1px solid #dadce0;
+		border-radius: 4px;
+		padding: 10px 24px;
+		cursor: pointer;
+		box-shadow: none;
+		transition: box-shadow 0.2s ease, background-color 0.2s ease;
+		user-select: none;
+		outline: none;
+	}
+
+	.google-btn:hover {
+		background-color: #f8f9fa;
+		box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3);
+	}
+
+	.google-btn:focus {
+		box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.5);
+	}
+
+	.google-btn:active {
+		background-color: #f1f3f4;
+		box-shadow: 0 1px 1px rgba(60, 64, 67, 0.2);
+	}
+
+	/* Primary variant (blue button) */
+	.google-btn-primary {
+		font-family: 'Roboto', Arial, sans-serif;
+		font-weight: 500;
+		font-size: 14px;
+		color: #3c4043;
+		border-radius: 4px;
+		padding: 10px 24px;
+		cursor: pointer;
+		transition: box-shadow 0.2s ease, background-color 0.2s ease;
+		user-select: none;
+		outline: none;
+		background-color: #1a73e8;
+		color: #fff;
+		border: none;
+		box-shadow: 0 1px 2px rgba(26, 115, 232, 0.4);
+	}
+
+	.google-btn-primary:hover {
+		background-color: #1669c1;
+		box-shadow: 0 2px 4px rgba(22, 105, 193, 0.5);
+	}
+
+	.google-btn-primary:focus {
+		box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.5);
+	}
+
+	.google-btn-primary:active {
+		background-color: #135ab4;
+		box-shadow: 0 1px 2px rgba(19, 90, 180, 0.4);
+	}
+	/*--- Button styling ---*/
 
   </style>
 </head>
@@ -132,11 +194,19 @@ body {
 <body>
 	<div id="captcha-container">
 		<div class="grid-container">
-			<div class="grid-item header" id="g1">Fill one of the jugs with exactly four gallons of water</div>
-			<div class="grid-item" id="g2">2</div>
-			<div class="grid-item" id="g3">3</div>
-			<div class="grid-item" id="g4">4</div>
-			<div class="grid-item" id="g5">5</div>
+			<div class="grid-item header" id="g1">Fill one of the jugs with exactly four gallons of water...</div>
+			<div class="grid-item" id="g2" style="display: flex; justify-content: flex-start; align-items: center;">
+				<img src="./tap.png" style="height: 60px; left: 0px;"/>
+			</div>
+			<div class="grid-item" id="g3">
+				<button class="google-btn">Fill</button>
+			</div>
+			<div class="grid-item" id="g4">
+				<button class="google-btn">Pour</button>
+			</div>
+			<div class="grid-item" id="g5">
+				<button class="google-btn">Empty</button>
+			</div>
 
       <!-- bigger bucket -->
 		  <div class="grid-item">
@@ -159,7 +229,9 @@ body {
 			</div>
 
 			<div class="grid-item" id="g8">8</div>
-			<div class="grid-item" id="g9">9</div>
+			<div class="grid-item" id="g9">
+				<button class="google-btn-primary">Submit</button>
+			</div>
 		</div>  
   </div>
 
