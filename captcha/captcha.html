@@ -2,53 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Joel</title>
+  <title>That a bomb?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style type="text/css">
-    html,
-    body {
-      background: pink;
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-    }
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-    #captcha-container {
-      background: white;
-      width: 390px;
-      height: 300px;
-    }
+  <style type="text/css">
+html,
+body {
+	background: pink;
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+	#captcha-container {
+		background: white;
+		width: 390px;
+		height: 300px;
+	}
 
 	/* Main grid styles */
 	.grid-container {
-	  display: grid;
-	  grid-template-columns: repeat(8, 1fr);
-	  grid-template-rows: repeat(4, 1fr);
-	  gap: 3px;
-	  width: 100%;
-	  max-width: 390px;
-	  height: 300px;
-	  max-height: 300px;
+		display: grid;
+		grid-template-columns: repeat(8, 1fr);
+		grid-template-rows: repeat(4, 1fr);
+		gap: 3px;
+		width: 100%;
+		max-width: 390px;
+		height: 300px;
+		max-height: 300px;
 	}
 
 	.grid-item {
-	  background-color: #ddd;
-	  border: 1px solid #999;
-	  display: flex;
-	  align-items: center;
-	  justify-content: center;
-	  font-size: 1.2rem;
+		border: 1px solid lightgray;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1rem;
+	    font-family: 'Roboto', sans-serif;
+		font-weight: 400;
 	}
 
 	/* Header spans all 4 columns */
-	.header {
-		grid-column: 1 / -1;
-		background-color: #bbb;
-		font-weight: bold;
+	.header { /* 1st child */
+		grid-column: 1/-1;
+		text-align: center;
 	}
 
-	/* Third row: 3 items spanning 4 columns (3+1 layout) */
 	.grid-item:nth-child(2){
 		grid-column: 1/3;
 		grid-row: 2;
@@ -84,80 +85,81 @@
 	}
 	/*--- Main grid styles ---*/
 
+	/* Bucket styling */
+	.bucket {
+		width: 200px;
+		height: 150px;
+		background: #3498db;
+		clip-path: polygon(
+			0% 0%,     /* upper left */
+			100% 0%,   /* upper right */
+			75% 100%,  /* lower right */
+			25% 100%   /* lower left */
+			);
 
-  .bucket {
-    width: 200px;
-    height: 150px;
-    background: #3498db;
-    clip-path: polygon(
-      0% 0%,     /* upper left */
-      100% 0%,   /* upper right */
-      75% 100%,  /* lower right */
-      25% 100%   /* lower left */
-    );
+		display: flex;
+		flex-direction: column;
 
-    display: flex;
-    flex-direction: column;
+		position: relative;
 
-    position: relative;
+		transform: scale(1.0);
+	}
 
-    transform: scale(1.0);
-  }
+	.bucket-label {
+		position: absolute;
+		top: 10px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 
-  .bucket-label {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+	.smaller-bucket {
+		transform: scale(0.8);
+	}
 
-  .smaller-bucket {
-    transform: scale(0.8);
-  }
-
-  .bucket-fill {
-    margin-top: auto;
-    height: 75px;
-    width: 150px;
-    background-color: #0000ff;
-  }
+	.bucket-fill {
+		margin-top: auto;
+		height: 75px;
+		width: 150px;
+		background-color: #0000ff;
+	}
+	/*--- Bucket styling ---*/
 
 
   </style>
 </head>
 
 <body>
-  <div id="captcha-container">
-	  <div class="grid-container">
-		  <div class="grid-item header">Header</div>
-		  <div class="grid-item">2</div>
-		  <div class="grid-item">3</div>
-		  <div class="grid-item">4</div>
-		  <div class="grid-item">5</div>
+	<div id="captcha-container">
+		<div class="grid-container">
+			<div class="grid-item header" id="g1">Fill one of the jugs with exactly four gallons of water</div>
+			<div class="grid-item" id="g2">2</div>
+			<div class="grid-item" id="g3">3</div>
+			<div class="grid-item" id="g4">4</div>
+			<div class="grid-item" id="g5">5</div>
 
-      <!-- bigger bucket -->
-		  <div class="grid-item">
-        <div class="bucket">
-          <p class="bucket-label">5L</p>
-          <div class="bucket-fill">
+			<!-- bigger bucket -->
+			<div class="grid-item" id="g6">
+				<div class="bucket">
+					<p class="bucket-label">5L</p>
+					<div class="bucket-fill">
 
-          </div>
-        </div>
-      </div>
-		  
-      <!-- smaller bucket -->
-      <div class="grid-item">
-        <div class="bucket smaller-bucket">
-          <p class="bucket-label">3L</p>
-          <div id="smallerBucketFill" class="bucket-fill">
+					</div>
+				</div>
+			</div>
 
-          </div>
-        </div>
-      </div>
-		  
-      <div class="grid-item">8</div>
-		  <div class="grid-item">9</div>
-	  </div>  
+			<!-- smaller bucket -->
+			<div class="grid-item" id="g7">
+				<div class="bucket smaller-bucket">
+					<p class="bucket-label">3L</p>
+					<div id="smallerBucketFill" class="bucket-fill">
+
+					</div>
+				</div>
+			</div>
+
+			<div class="grid-item" id="g8">8</div>
+			<div class="grid-item" id="g9">9</div>
+		</div>  
   </div>
 
   <script type="text/javascript">
