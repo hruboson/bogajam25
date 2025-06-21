@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>That a bomb?</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<meta charset="utf-8">
+		<title>That a bomb?</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-  <style type="text/css">
+		<style type="text/css">
 html,
 body {
 	background: pink;
@@ -39,7 +39,7 @@ body {
 		align-items: center;
 		justify-content: center;
 		font-size: 1rem;
-	    font-family: 'Roboto', sans-serif;
+		font-family: 'Roboto', sans-serif;
 		font-weight: 400;
 	}
 
@@ -111,16 +111,37 @@ body {
 		transform: translateX(-50%);
 	}
 
-  .smaller-bucket {
-    height: 120px;
-    width: 120px;
-  }
+	.smaller-bucket {
+		height: 120px;
+		width: 120px;
+	}
 
 	.bucket-fill {
 		margin-top: auto;
 		height: 75px;
 		width: 150px;
 		background-color: #0000ff;
+	}
+
+	.bucket.selected::before {
+		content: "";
+		position: absolute;
+		top: -8px;
+		left: -8px;
+		width: calc(100% + 16px);
+		height: calc(100% + 16px);
+
+		background: #ff9800;
+		clip-path: polygon(
+			0% 0%,     /* upper left */
+			100% 0%,   /* upper right */
+			75% 100%,  /* lower right */
+			25% 100%   /* lower left */
+			);
+
+		z-index: -1; /* behind the actual bucket */
+		border-radius: 8px;
+		box-shadow: 0 0 20px #ff9800aa;
 	}
 	/*--- Bucket styling ---*/
 
@@ -188,8 +209,8 @@ body {
 	}
 	/*--- Button styling ---*/
 
-  </style>
-</head>
+		</style>
+	</head>
 
 <body>
 	<div id="captcha-container">
@@ -208,39 +229,35 @@ body {
 				<button id="emptyBtn" class="google-btn">Empty</button>
 			</div>
 
-      <!-- bigger bucket -->
-		  <div class="grid-item">
-        <div class="bucket">
-          <p class="bucket-label">5L</p>
-          <div id="biggerBucketFill" class="bucket-fill">
+				<!-- bigger bucket -->
+				<div class="grid-item">
+					<div class="bucket" id="biggerBucket">
+						<p class="bucket-label">5L</p>
+						<div id="biggerBucketFill" class="bucket-fill">
 
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<!-- smaller bucket -->
-			<div class="grid-item" id="g7">
-				<div class="bucket smaller-bucket">
-					<p class="bucket-label">3L</p>
-					<div id="smallerBucketFill" class="bucket-fill">
+				<!-- smaller bucket -->
+				<div class="grid-item" id="g7">
+					<div class="bucket smaller-bucket" id="smallerBucket">
+						<p class="bucket-label">3L</p>
+						<div id="smallerBucketFill" class="bucket-fill">
 
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="grid-item" id="g8">8</div>
-			<div class="grid-item" id="g9">
-				<button class="google-btn-primary">Submit</button>
-			</div>
-		</div>  
-  </div>
+				<div class="grid-item" id="g8">8</div>
+				<div class="grid-item" id="g9">
+					<button class="google-btn-primary">Submit</button>
+				</div>
+			</div>  
+		</div>
 
-  <script type="text/javascript">
-    (function(window, document){
-      // This is how you tell the parent window that the CAPTCHA was successful.
-      function captchaSuccess() {
-        window.top.postMessage("success", '*');
-      }
+		<script type="text/javascript">
+			let selectedBucket = "bigger"; // "bigger" or "smaller"
 
       let smallerBucketFill = document.getElementById("smallerBucketFill");
       let biggerBucketFill = document.getElementById("biggerBucketFill");
@@ -283,7 +300,44 @@ body {
         setWaterLevel();
       });
 
-    })(window, document);
-  </script>
-</body>
+			const biggerBucket = document.getElementById("biggerBucket");
+			const smallerBucket = document.getElementById("smallerBucket");
+
+			// default - bigger is selected
+			window.addEventListener("DOMContentLoaded", () => {
+				biggerBucket.classList.add("selected");
+				smallerBucket.classList.remove("selected");
+				selectedBucket = "bigger";
+			});
+
+			biggerBucket.addEventListener("click", () => {
+				selectedBucket = "bigger";
+				biggerBucket.classList.add("selected");
+				smallerBucket.classList.remove("selected");
+			});
+
+			smallerBucket.addEventListener("click", () => {
+				selectedBucket = "smaller";
+				smallerBucket.classList.add("selected");
+				biggerBucket.classList.remove("selected");
+			});
+
+			(function(window, document){
+				// This is how you tell the parent window that the CAPTCHA was successful.
+				function captchaSuccess() {
+					window.top.postMessage("success", '*');
+				}
+
+				let smallerBucketCurrentWaterLevel = 0; // <0;3>
+				let biggerBucketCurrentWaterLevel = 0; // <0;5>
+
+				let smallerBucketFill = document.getElementById("smallerBucketFill");
+				let biggerBucketFill = document.getElementById("biggerBucketFill");
+
+				smallerBucketFill.style = `height: ${120/3*smallerBucketCurrentWaterLevel}px`;
+				biggerBucketFill.style = `height: ${150/5*biggerBucketCurrentWaterLevel}px`;
+
+			})(window, document);
+		</script>
+	</body>
 </html>
