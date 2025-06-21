@@ -199,13 +199,13 @@ body {
 				<img src="./tap.png" style="height: 60px; left: 0px;"/>
 			</div>
 			<div class="grid-item" id="g3">
-				<button class="google-btn">Fill</button>
+				<button id="fillBtn" class="google-btn">Fill</button>
 			</div>
 			<div class="grid-item" id="g4">
-				<button class="google-btn">Pour</button>
+				<button id="pourBtn" class="google-btn">Pour</button>
 			</div>
 			<div class="grid-item" id="g5">
-				<button class="google-btn">Empty</button>
+				<button id="emptyBtn" class="google-btn">Empty</button>
 			</div>
 
       <!-- bigger bucket -->
@@ -242,14 +242,46 @@ body {
         window.top.postMessage("success", '*');
       }
 
-      let smallerBucketCurrentWaterLevel = 0; // <0;3>
-      let biggerBucketCurrentWaterLevel = 0; // <0;5>
-
       let smallerBucketFill = document.getElementById("smallerBucketFill");
       let biggerBucketFill = document.getElementById("biggerBucketFill");
 
-      smallerBucketFill.style = `height: ${120/3*smallerBucketCurrentWaterLevel}px`;
-      biggerBucketFill.style = `height: ${150/5*biggerBucketCurrentWaterLevel}px`;
+      let smallerBucketCurrentWaterLevel = 0; // <0;3>
+      let biggerBucketCurrentWaterLevel = 0; // <0;5>
+
+      // sets water level of both buckets according to currentWaterLevel variables
+      function setWaterLevel() {
+        smallerBucketFill.style = `height: ${120/3*smallerBucketCurrentWaterLevel}px`;
+        biggerBucketFill.style = `height: ${150/5*biggerBucketCurrentWaterLevel}px`;
+      }
+
+      setWaterLevel();
+
+      // fill
+      document.getElementById("fillBtn").addEventListener("click", () => {
+        console.log("filled");
+      
+        //TODO
+
+        setWaterLevel();
+      });
+
+      // pour
+      document.getElementById("pourBtn").addEventListener("click", () => {
+        console.log("poured");
+      
+        //TODO
+
+        setWaterLevel();
+      });
+
+      // empty
+      document.getElementById("emptyBtn").addEventListener("click", () => {
+        console.log("empty");
+      
+        //TODO
+
+        setWaterLevel();
+      });
 
     })(window, document);
   </script>
