@@ -83,6 +83,46 @@
 		grid-row: 4;
 	}
 	/*--- Main grid styles ---*/
+
+
+  .bucket {
+    width: 200px;
+    height: 150px;
+    background: #3498db;
+    clip-path: polygon(
+      0% 0%,     /* upper left */
+      100% 0%,   /* upper right */
+      75% 100%,  /* lower right */
+      25% 100%   /* lower left */
+    );
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    transform: scale(1.0);
+  }
+
+  .bucket-label {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .smaller-bucket {
+    transform: scale(0.8);
+  }
+
+  .bucket-fill {
+    margin-top: auto;
+    height: 75px;
+    width: 150px;
+    background-color: #0000ff;
+  }
+
+
   </style>
 </head>
 
@@ -94,9 +134,28 @@
 		  <div class="grid-item">3</div>
 		  <div class="grid-item">4</div>
 		  <div class="grid-item">5</div>
-		  <div class="grid-item">6</div>
-		  <div class="grid-item">7</div>
-		  <div class="grid-item">8</div>
+
+      <!-- bigger bucket -->
+		  <div class="grid-item">
+        <div class="bucket">
+          <p class="bucket-label">5L</p>
+          <div class="bucket-fill">
+
+          </div>
+        </div>
+      </div>
+		  
+      <!-- smaller bucket -->
+      <div class="grid-item">
+        <div class="bucket smaller-bucket">
+          <p class="bucket-label">3L</p>
+          <div id="smallerBucketFill" class="bucket-fill">
+
+          </div>
+        </div>
+      </div>
+		  
+      <div class="grid-item">8</div>
 		  <div class="grid-item">9</div>
 	  </div>  
   </div>
