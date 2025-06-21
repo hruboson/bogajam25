@@ -14,7 +14,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
-  overflow: hidden;
+	overflow: hidden;
 }
 
 	#captcha-container {
@@ -199,136 +199,151 @@ body {
 	}
 	/*--- Button styling ---*/
 
+	/* Submit button animation */
+	@keyframes shakeAndFlash {
+		0% { transform: translateX(0); background-color: red; }
+		20% { transform: translateX(-5px); }
+		40% { transform: translateX(5px); }
+		60% { transform: translateX(-5px); }
+		80% { transform: translateX(5px); }
+		100% { transform: translateX(0); background-color: #1a73e8; }
+	}
+
+	.shake-and-flash {
+		animation: shakeAndFlash 0.7s ease;
+	}
+	/*--- Submit button animation ---*/
+
 		</style>
 	</head>
 
-<body>
-	<div id="captcha-container">
-		<div class="grid-container">
-			<div class="grid-item header" id="g1">Fill one of the jugs with exactly four gallons of water...</div>
-			<div class="grid-item" id="g2" style="display: flex; justify-content: flex-start; align-items: center;">
-				<img src="./tap.png" style="height: 60px; left: 0px;"/>
-			</div>
-			<div class="grid-item" id="g3">
-				<button id="fillBtn" class="google-btn">Fill</button>
-			</div>
-			<div class="grid-item" id="g4">
-				<button id="pourBtn" class="google-btn">Pour</button>
-			</div>
-			<div class="grid-item" id="g5">
-				<button id="emptyBtn" class="google-btn">Empty</button>
-			</div>
+	<body>
+		<div id="captcha-container">
+			<div class="grid-container">
+				<div class="grid-item header" id="g1">Fill one of the jugs with exactly four gallons of water...</div>
+				<div class="grid-item" id="g2" style="display: flex; justify-content: flex-start; align-items: center;">
+					<img src="./tap.png" style="height: 60px; left: 0px;"/>
+				</div>
+				<div class="grid-item" id="g3">
+					<button id="fillBtn" class="google-btn">Fill</button>
+				</div>
+				<div class="grid-item" id="g4">
+					<button id="pourBtn" class="google-btn">Pour</button>
+				</div>
+				<div class="grid-item" id="g5">
+					<button id="emptyBtn" class="google-btn">Empty</button>
+				</div>
 
-			<!-- bigger bucket -->
-			<div class="grid-item" id="g6" style="display: flex; flex-direction: column; align-items: center;">
-				<div class="bucket-arrow" id="biggerBucketArrow"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#000" d="M12 4.75c-.69 0-1.25.56-1.25 1.25v8.982l-2.866-2.866a1.25 1.25 0 0 0-1.768 1.768l5 5a1.25 1.25 0 0 0 1.768 0l5-5a1.25 1.25 0 0 0-1.768-1.768l-2.866 2.866V6c0-.69-.56-1.25-1.25-1.25"/></svg></div>
-				<div class="bucket" id="biggerBucket">
-					<p id="biggerBucketLabel" class="bucket-label">0 / 5L</p>
-					<div id="biggerBucketFill" class="bucket-fill">
+				<!-- bigger bucket -->
+				<div class="grid-item" id="g6" style="display: flex; flex-direction: column; align-items: center;">
+					<div class="bucket-arrow" id="biggerBucketArrow"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#000" d="M12 4.75c-.69 0-1.25.56-1.25 1.25v8.982l-2.866-2.866a1.25 1.25 0 0 0-1.768 1.768l5 5a1.25 1.25 0 0 0 1.768 0l5-5a1.25 1.25 0 0 0-1.768-1.768l-2.866 2.866V6c0-.69-.56-1.25-1.25-1.25"/></svg></div>
+					<div class="bucket" id="biggerBucket">
+						<p id="biggerBucketLabel" class="bucket-label">0 / 5L</p>
+						<div id="biggerBucketFill" class="bucket-fill">
 
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<!-- smaller bucket -->
-			<div class="grid-item" id="g7" style="display: flex; flex-direction: column; align-items: center;">
-				<div class="bucket-arrow" id="smallerBucketArrow"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#000" d="M12 4.75c-.69 0-1.25.56-1.25 1.25v8.982l-2.866-2.866a1.25 1.25 0 0 0-1.768 1.768l5 5a1.25 1.25 0 0 0 1.768 0l5-5a1.25 1.25 0 0 0-1.768-1.768l-2.866 2.866V6c0-.69-.56-1.25-1.25-1.25"/></svg></div>
-				<div class="bucket smaller-bucket" id="smallerBucket">
-					<p id="smallerBucketLabel" class="bucket-label">0 / 3L</p>
-					<div id="smallerBucketFill" class="bucket-fill">
+				<!-- smaller bucket -->
+				<div class="grid-item" id="g7" style="display: flex; flex-direction: column; align-items: center;">
+					<div class="bucket-arrow" id="smallerBucketArrow"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#000" d="M12 4.75c-.69 0-1.25.56-1.25 1.25v8.982l-2.866-2.866a1.25 1.25 0 0 0-1.768 1.768l5 5a1.25 1.25 0 0 0 1.768 0l5-5a1.25 1.25 0 0 0-1.768-1.768l-2.866 2.866V6c0-.69-.56-1.25-1.25-1.25"/></svg></div>
+					<div class="bucket smaller-bucket" id="smallerBucket">
+						<p id="smallerBucketLabel" class="bucket-label">0 / 3L</p>
+						<div id="smallerBucketFill" class="bucket-fill">
 
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="grid-item" id="g8"></div>
-			<div class="grid-item" id="g9">
-				<button class="google-btn-primary">Submit</button>
-			</div>
-		</div>  
-	</div>
+				<div class="grid-item" id="g8"></div>
+				<div class="grid-item" id="g9">
+					<button class="google-btn-primary" id="submit-button">Submit</button>
+				</div>
+			</div>  
+		</div>
 
-	<script type="text/javascript">
-	  let selectedBucket = "bigger"; // "bigger" or "smaller"
+		<script type="text/javascript">
+			let selectedBucket = "bigger"; // "bigger" or "smaller"
 
-	  let smallerBucketLabel = document.getElementById("smallerBucketLabel");
-	  let biggerBucketLabel = document.getElementById("biggerBucketLabel");
+			let smallerBucketLabel = document.getElementById("smallerBucketLabel");
+			let biggerBucketLabel = document.getElementById("biggerBucketLabel");
 
-      let smallerBucketFill = document.getElementById("smallerBucketFill");
-      let biggerBucketFill = document.getElementById("biggerBucketFill");
+			let smallerBucketFill = document.getElementById("smallerBucketFill");
+			let biggerBucketFill = document.getElementById("biggerBucketFill");
 
-      let smallerBucketCurrentWaterLevel = 0; // <0;3>
-      let biggerBucketCurrentWaterLevel = 0; // <0;5>
+			let smallerBucketCurrentWaterLevel = 0; // <0;3>
+			let biggerBucketCurrentWaterLevel = 0; // <0;5>
 
-      // sets water level of both buckets according to currentWaterLevel variables
-      function setWaterLevel() {
-        smallerBucketFill.style = `height: ${90/3*smallerBucketCurrentWaterLevel}px`;
-        biggerBucketFill.style = `height: ${120/5*biggerBucketCurrentWaterLevel}px`;	
-		
-		smallerBucketLabel.innerText = `${smallerBucketCurrentWaterLevel} / 3L`;
-		biggerBucketLabel.innerText = `${biggerBucketCurrentWaterLevel} / 5L`;
-	  }
+			// sets water level of both buckets according to currentWaterLevel variables
+			function setWaterLevel() {
+				smallerBucketFill.style = `height: ${90/3*smallerBucketCurrentWaterLevel}px`;
+				biggerBucketFill.style = `height: ${120/5*biggerBucketCurrentWaterLevel}px`;	
 
-      setWaterLevel();
+				smallerBucketLabel.innerText = `${smallerBucketCurrentWaterLevel} / 3L`;
+				biggerBucketLabel.innerText = `${biggerBucketCurrentWaterLevel} / 5L`;
+			}
 
-      // fill
-      document.getElementById("fillBtn").addEventListener("click", () => {
-        console.log("filled");
-      
-        if (selectedBucket === "bigger") {
-          biggerBucketCurrentWaterLevel = 5;
-        }
-        else {
-          smallerBucketCurrentWaterLevel = 3;
-        }
+			setWaterLevel();
 
-        setWaterLevel();
-      });
+			// fill
+			document.getElementById("fillBtn").addEventListener("click", () => {
+				console.log("filled");
 
-      // pour
-      document.getElementById("pourBtn").addEventListener("click", () => {
-        console.log("poured");
-      
-        if (selectedBucket === "bigger") {
-          let freeSpace = (3 - smallerBucketCurrentWaterLevel);
+				if (selectedBucket === "bigger") {
+					biggerBucketCurrentWaterLevel = 5;
+				}
+				else {
+					smallerBucketCurrentWaterLevel = 3;
+				}
 
-          if (biggerBucketCurrentWaterLevel >= freeSpace) {
-            smallerBucketCurrentWaterLevel = 3;
-			biggerBucketCurrentWaterLevel = biggerBucketCurrentWaterLevel - freeSpace;
+				setWaterLevel();
+			});
 
-          } else {
-            smallerBucketCurrentWaterLevel += biggerBucketCurrentWaterLevel;
-			biggerBucketCurrentWaterLevel = 0;
-          }
-        }
-        else {
-          let freeSpace = (5 - biggerBucketCurrentWaterLevel);
+			// pour
+			document.getElementById("pourBtn").addEventListener("click", () => {
+				console.log("poured");
 
-          if (smallerBucketCurrentWaterLevel >= freeSpace) {
-            biggerBucketCurrentWaterLevel = 5;
-			smallerBucketCurrentWaterLevel = smallerBucketCurrentWaterLevel - freeSpace;
-          } else {
-            biggerBucketCurrentWaterLevel += smallerBucketCurrentWaterLevel;
-			smallerBucketCurrentWaterLevel = 0;
-          }
-        }
+				if (selectedBucket === "bigger") {
+					let freeSpace = (3 - smallerBucketCurrentWaterLevel);
 
-        setWaterLevel();
-      });
+					if (biggerBucketCurrentWaterLevel >= freeSpace) {
+						smallerBucketCurrentWaterLevel = 3;
+						biggerBucketCurrentWaterLevel = biggerBucketCurrentWaterLevel - freeSpace;
 
-      // empty
-      document.getElementById("emptyBtn").addEventListener("click", () => {
-        console.log("empty");
-      
-        if (selectedBucket === "bigger") {
-          biggerBucketCurrentWaterLevel = 0;
-        }
-        else {
-          smallerBucketCurrentWaterLevel = 0;
-        }
+					} else {
+						smallerBucketCurrentWaterLevel += biggerBucketCurrentWaterLevel;
+						biggerBucketCurrentWaterLevel = 0;
+					}
+				}
+				else {
+					let freeSpace = (5 - biggerBucketCurrentWaterLevel);
 
-        setWaterLevel();
-      });
+					if (smallerBucketCurrentWaterLevel >= freeSpace) {
+						biggerBucketCurrentWaterLevel = 5;
+						smallerBucketCurrentWaterLevel = smallerBucketCurrentWaterLevel - freeSpace;
+					} else {
+						biggerBucketCurrentWaterLevel += smallerBucketCurrentWaterLevel;
+						smallerBucketCurrentWaterLevel = 0;
+					}
+				}
+
+				setWaterLevel();
+			});
+
+			// empty
+			document.getElementById("emptyBtn").addEventListener("click", () => {
+				console.log("empty");
+
+				if (selectedBucket === "bigger") {
+					biggerBucketCurrentWaterLevel = 0;
+				}
+				else {
+					smallerBucketCurrentWaterLevel = 0;
+				}
+
+				setWaterLevel();
+			});
 
 			const biggerBucket = document.getElementById("biggerBucket");
 			const smallerBucket = document.getElementById("smallerBucket");
@@ -361,20 +376,29 @@ body {
 				smallerBucketArrow.style.visibility = "visible";
 			});
 
+			function notifyNotSuccess() {
+				const btn = document.getElementById("submit-button");
+				btn.classList.add("shake-and-flash");
+
+				// Remove the class after the animation completes so it can be triggered again
+				btn.addEventListener("animationend", () => {
+					btn.classList.remove("shake-and-flash");
+				}, { once: true });
+			}
+
 			(function(window, document){
 				// This is how you tell the parent window that the CAPTCHA was successful.
 				function captchaSuccess() {
 					window.top.postMessage("success", '*');
 				}
 
-				let smallerBucketCurrentWaterLevel = 0; // <0;3>
-				let biggerBucketCurrentWaterLevel = 0; // <0;5>
-
 				let smallerBucketFill = document.getElementById("smallerBucketFill");
 				let biggerBucketFill = document.getElementById("biggerBucketFill");
 
 				smallerBucketFill.style = `height: ${120/3*smallerBucketCurrentWaterLevel}px`;
 				biggerBucketFill.style = `height: ${150/5*biggerBucketCurrentWaterLevel}px`;
+
+				document.getElementById("submit-button").addEventListener('click', () => biggerBucketCurrentWaterLevel == 4 ? captchaSuccess() : notifyNotSuccess());
 
 			})(window, document);
 		</script>
