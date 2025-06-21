@@ -33,6 +33,8 @@ body {
 		max-width: 390px;
 		height: 300px;
 		max-height: 300px;
+		position: relative;
+		overflow: visible !important;
 	}
 
 	.grid-item {
@@ -124,25 +126,12 @@ body {
 		background-color: #0000ff;
 	}
 
-	.bucket.selected::before {
-		content: "";
-		position: absolute;
-		top: -8px;
-		left: -8px;
-		width: calc(100% + 16px);
-		height: calc(100% + 16px);
-
-		background: #ff9800;
-		clip-path: polygon(
-			0% 0%,     /* upper left */
-			100% 0%,   /* upper right */
-			75% 100%,  /* lower right */
-			25% 100%   /* lower left */
-			);
-
-		z-index: -1; /* behind the actual bucket */
-		border-radius: 8px;
-		box-shadow: 0 0 20px #ff9800aa;
+	.bucket-arrow {
+		font-weight: 700;
+		font-size: 24px;
+		color: black;
+		pointer-events: none;
+		visibility: hidden;
 	}
 	/*--- Bucket styling ---*/
 
@@ -230,32 +219,34 @@ body {
 				<button id="emptyBtn" class="google-btn">Empty</button>
 			</div>
 
-				<!-- bigger bucket -->
-				<div class="grid-item">
-					<div class="bucket" id="biggerBucket">
-						<p class="bucket-label">5L</p>
-						<div id="biggerBucketFill" class="bucket-fill">
+			<!-- bigger bucket -->
+			<div class="grid-item" id="g6" style="display: flex; flex-direction: column; align-items: center;">
+				<div class="bucket-arrow" id="biggerBucketArrow"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#000" d="M12 4.75c-.69 0-1.25.56-1.25 1.25v8.982l-2.866-2.866a1.25 1.25 0 0 0-1.768 1.768l5 5a1.25 1.25 0 0 0 1.768 0l5-5a1.25 1.25 0 0 0-1.768-1.768l-2.866 2.866V6c0-.69-.56-1.25-1.25-1.25"/></svg></div>
+				<div class="bucket" id="biggerBucket">
+					<p class="bucket-label">5L</p>
+					<div id="biggerBucketFill" class="bucket-fill">
 
-						</div>
 					</div>
 				</div>
+			</div>
 
-				<!-- smaller bucket -->
-				<div class="grid-item" id="g7">
-					<div class="bucket smaller-bucket" id="smallerBucket">
-						<p class="bucket-label">3L</p>
-						<div id="smallerBucketFill" class="bucket-fill">
+			<!-- smaller bucket -->
+			<div class="grid-item" id="g7" style="display: flex; flex-direction: column; align-items: center;">
+				<div class="bucket-arrow" id="smallerBucketArrow"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#000" d="M12 4.75c-.69 0-1.25.56-1.25 1.25v8.982l-2.866-2.866a1.25 1.25 0 0 0-1.768 1.768l5 5a1.25 1.25 0 0 0 1.768 0l5-5a1.25 1.25 0 0 0-1.768-1.768l-2.866 2.866V6c0-.69-.56-1.25-1.25-1.25"/></svg></div>
+				<div class="bucket smaller-bucket" id="smallerBucket">
+					<p class="bucket-label">3L</p>
+					<div id="smallerBucketFill" class="bucket-fill">
 
-						</div>
 					</div>
 				</div>
+			</div>
 
-				<div class="grid-item" id="g8"></div>
-				<div class="grid-item" id="g9">
-					<button class="google-btn-primary">Submit</button>
-				</div>
-			</div>  
-		</div>
+			<div class="grid-item" id="g8"></div>
+			<div class="grid-item" id="g9">
+				<button class="google-btn-primary">Submit</button>
+			</div>
+		</div>  
+	</div>
 
 		<script type="text/javascript">
 			let selectedBucket = "bigger"; // "bigger" or "smaller"
@@ -340,18 +331,27 @@ body {
 				biggerBucket.classList.add("selected");
 				smallerBucket.classList.remove("selected");
 				selectedBucket = "bigger";
+
+				biggerBucketArrow.style.visibility = "visible";
+				smallerBucketArrow.style.visibility = "hidden";
 			});
 
 			biggerBucket.addEventListener("click", () => {
 				selectedBucket = "bigger";
 				biggerBucket.classList.add("selected");
 				smallerBucket.classList.remove("selected");
+
+				biggerBucketArrow.style.visibility = "visible";
+				smallerBucketArrow.style.visibility = "hidden";
 			});
 
 			smallerBucket.addEventListener("click", () => {
 				selectedBucket = "smaller";
 				smallerBucket.classList.add("selected");
 				biggerBucket.classList.remove("selected");
+
+				biggerBucketArrow.style.visibility = "hidden";
+				smallerBucketArrow.style.visibility = "visible";
 			});
 
 			(function(window, document){
