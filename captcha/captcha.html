@@ -132,6 +132,7 @@ body {
 		color: black;
 		pointer-events: none;
 		visibility: hidden;
+		margin-bottom: 10px;
 	}
 	/*--- Bucket styling ---*/
 
@@ -235,7 +236,7 @@ body {
 				</div>
 
 				<!-- bigger bucket -->
-				<div class="grid-item" id="g6" style="display: flex; flex-direction: column; align-items: center;">
+				<!--div class="grid-item" id="g6" style="display: flex; flex-direction: column; align-items: center;">
 					<div class="bucket-arrow" id="biggerBucketArrow"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#000" d="M12 4.75c-.69 0-1.25.56-1.25 1.25v8.982l-2.866-2.866a1.25 1.25 0 0 0-1.768 1.768l5 5a1.25 1.25 0 0 0 1.768 0l5-5a1.25 1.25 0 0 0-1.768-1.768l-2.866 2.866V6c0-.69-.56-1.25-1.25-1.25"/></svg></div>
 					<div class="bucket" id="biggerBucket">
 						<p id="biggerBucketLabel" class="bucket-label">0 / 5L</p>
@@ -243,16 +244,44 @@ body {
 
 						</div>
 					</div>
+				</div-->
+
+				<div class="grid-item" id="g6" style="display: flex; flex-direction: column; align-items: center;">
+					<div class="bucket-arrow" id="biggerBucketArrow"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#000" d="M12 4.75c-.69 0-1.25.56-1.25 1.25v8.982l-2.866-2.866a1.25 1.25 0 0 0-1.768 1.768l5 5a1.25 1.25 0 0 0 1.768 0l5-5a1.25 1.25 0 0 0-1.768-1.768l-2.866 2.866V6c0-.69-.56-1.25-1.25-1.25"/></svg></div>
+					<div class="bucket-png" id="biggerBucket" style="position: relative; width: 80px; height: 100px;">
+						<!-- Fill layer -->
+						<div id="biggerBucketFill"
+							 style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: #1ca3ec; z-index: 1; transition: height 0.3s;">
+						</div>
+
+						<!-- Bucket image -->
+						<img src="./big.png" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 115px; z-index: 2;">
+						<p id="biggerBucketLabel" class="bucket-label" style="z-index: 3; padding-top: 15px; text-align: center; color: black;">0/5<br>gal</p>
+					</div>
 				</div>
 
 				<!-- smaller bucket -->
-				<div class="grid-item" id="g7" style="display: flex; flex-direction: column; align-items: center;">
+				<!--div class="grid-item" id="g7" style="display: flex; flex-direction: column; align-items: center;">
 					<div class="bucket-arrow" id="smallerBucketArrow"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#000" d="M12 4.75c-.69 0-1.25.56-1.25 1.25v8.982l-2.866-2.866a1.25 1.25 0 0 0-1.768 1.768l5 5a1.25 1.25 0 0 0 1.768 0l5-5a1.25 1.25 0 0 0-1.768-1.768l-2.866 2.866V6c0-.69-.56-1.25-1.25-1.25"/></svg></div>
 					<div class="bucket smaller-bucket" id="smallerBucket">
 						<p id="smallerBucketLabel" class="bucket-label">0 / 3L</p>
 						<div id="smallerBucketFill" class="bucket-fill">
 
 						</div>
+					</div>
+				</div-->
+
+				<div class="grid-item" id="g7" style="display: flex; flex-direction: column; align-items: center;">
+					<div class="bucket-arrow" id="smallerBucketArrow"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#000" d="M12 4.75c-.69 0-1.25.56-1.25 1.25v8.982l-2.866-2.866a1.25 1.25 0 0 0-1.768 1.768l5 5a1.25 1.25 0 0 0 1.768 0l5-5a1.25 1.25 0 0 0-1.768-1.768l-2.866 2.866V6c0-.69-.56-1.25-1.25-1.25"/></svg></div>
+					<div class="bucket-png" id="smallerBucket" style="position: relative; width: 60px; height: 90px;">
+						<!-- Fill layer -->
+						<div id="smallerBucketFill"
+							 style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: #1ca3ec; z-index: 1; transition: height 0.3s;">
+						</div>
+
+						<!-- Bucket image -->
+						<img src="./big.png" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
+						<p id="smallerBucketLabel" class="bucket-label" style="z-index: 3; padding-top: 20px; text-align: center; color: black;">0/3<br>gal</p>
 					</div>
 				</div>
 
@@ -277,14 +306,14 @@ body {
 
 			// sets water level of both buckets according to currentWaterLevel variables
 			function setWaterLevel() {
-				smallerBucketFill.style = `height: ${90/3*smallerBucketCurrentWaterLevel}px`;
-				biggerBucketFill.style = `height: ${120/5*biggerBucketCurrentWaterLevel}px`;	
+				smallerBucketFill.style.height = `${(smallerBucketCurrentWaterLevel/3)*100}%`;
+				biggerBucketFill.style.height = `${(biggerBucketCurrentWaterLevel/5)*100}%`;	
 
-				smallerBucketLabel.innerText = `${smallerBucketCurrentWaterLevel} / 3L`;
-				biggerBucketLabel.innerText = `${biggerBucketCurrentWaterLevel} / 5L`;
+				smallerBucketLabel.innerHTML = `${smallerBucketCurrentWaterLevel}/3<br>gal`;
+				biggerBucketLabel.innerHTML = `${biggerBucketCurrentWaterLevel}/5<br>gal`;
 			}
 
-			setWaterLevel();
+			//setWaterLevel();
 
 			// fill
 			document.getElementById("fillBtn").addEventListener("click", () => {
@@ -395,8 +424,7 @@ body {
 				let smallerBucketFill = document.getElementById("smallerBucketFill");
 				let biggerBucketFill = document.getElementById("biggerBucketFill");
 
-				smallerBucketFill.style = `height: ${120/3*smallerBucketCurrentWaterLevel}px`;
-				biggerBucketFill.style = `height: ${150/5*biggerBucketCurrentWaterLevel}px`;
+				setWaterLevel();	
 
 				document.getElementById("submit-button").addEventListener('click', () => biggerBucketCurrentWaterLevel == 4 ? captchaSuccess() : notifyNotSuccess());
 
